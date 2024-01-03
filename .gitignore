@@ -10,3 +10,5 @@ model/tokenizer_config.json
 model/tokenizer.json
 model/vocab.txt
 model/gpt4all-falcon-q4_0.gguf
+validationDataset/
+mixedDocs.txt
