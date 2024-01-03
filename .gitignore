@@ -3,3 +3,10 @@ stemmed.tar.gz
 stemmed.txt
 stemmed.vocab
 data/stemmed.tar
+model/config.json
+model/model.safetensors
+model/special_tokens_map.json
+model/tokenizer_config.json
+model/tokenizer.json
+model/vocab.txt
+model/gpt4all-falcon-q4_0.gguf
