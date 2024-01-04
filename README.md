@@ -88,6 +88,8 @@ Please, note that these results were achieved by using a subset of the wikipedia
 ![alt text](/plots/relevance_percent_top_x.png)
 ![alt text](/plots/relevance_percent_relevant.png)
 
+These two graph show a percentbased representation of the amount of LLM-generated documents and Wikipedia documents retrived by our IR system.
+
 From these two plots we conclude, tath the LLM-generated documents do indeed hold valuable and correct information as they make up a little less than 50% of all documents.
 Looking closer at plot 2 however, the Wikipedia articles answer the queries a little better in general as they are retrieved a bit more often.
 
@@ -95,14 +97,19 @@ Looking closer at plot 2 however, the Wikipedia articles answer the queries a li
 ![alt text](/plots/first_index_top_x.png)
 ![alt text](/plots/first_index_relevant.png)
 
-The thesis of method one is further underlined by looking at these two plots. Here we can see the two best fitting documents for a given query normally alternate between being LLM generated or from Wikipedia. This test is however to be taken with a grain of salt since we use the titles of the documents as queries. Since the LLM answers were generated using the Wikipedia articles it is somewhat expected that these 2 documents form the 2 best matches. 
-Trying random queries however reveals a similar, but not so obvious result.
+These two graphs show the position of the first document of one type in the list of retrieved documents. Please not that index 0 denotes, that no document of this type was found within the relevant answers.
+
+The thesis of method one is further underlined by looking at these two plots. Here we can see the two best fitting documents for a given query normally alternate between being LLM generated or from Wikipedia.
+The wikipedia document being in the top results is to be expected as the query used is the title of the articles. This further supports our theses, since also the LLM generated document (generated using the same title) shows up here. In order for this to happen, the generated content has to state fatcts about the chosen topic. If the AI  where to produce "random" answers, they would not show up anywhere near the top.
 
 ### 3. The average position of LMM and wiki documents in the top results
 ![alt text](/plots/avg_position_top_x.png)
 ![alt text](/plots/avg_position_relevant.png)
 
-These last two plots show the distribution of the 2 types of documents across the top answers to our queries. Evaluating these graphs we conclude the LLM generates mostly correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
+These two graphs show the average position of the documents separated again by type.
+
+Evaluating these graphs we conclude the LLM generates correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
+We can interpret the content of these graphs as a quality metric.
 
 ## Future Improvements
 Although our results are significant, there are a few things that could be improved:
