@@ -1,17 +1,19 @@
-
 # Content Accuracy of the gpt4all-falcon model
 Advanced Information Retrieval group project 2023/24   
 Group 03 with members:  
-Patrick Hanfstingl  
-Florian Zanotti  
-Jakob Zenz
+
+**Patrick Hanfstingl**  
+**Florian Zanotti**  
+**Jakob Zenz**
 ___
 ___
 ___
 ___
+
 # Project Idea
 In this project we investigate whether an open source Large Language Model (LLM), in particular gpt4all-falcon, can deliver relevant results in terms of Information Retrieval.
 ___
+
 # Implementation
 Overview of the implementation:
 1) Get a dataset containing the titles we use as queries and the corresponding documents, we chose a Wikipedia subset.
@@ -22,7 +24,8 @@ Overview of the implementation:
 6) Sort out documents that have a very low relevance score, they are basically not relevant matches.
 7) Now we get a corresponding mixed ranking of LLM and non-LLM documents, which directly translates to the performance of the LLM compared to human written wikipedia articles. Then we calculate some metrics/statistics about the quantity and rank of LLM documents compared to non-LLM documents.
 ___
-## The Choice of the LLM
+
+## Choosing the LLM
 Gpt4all-falcon (https://gpt4all.io/index.html) has the following features
 - Relatively small size at ~4 GB
 - Requires only 8 GB of RAM
@@ -30,7 +33,8 @@ Gpt4all-falcon (https://gpt4all.io/index.html) has the following features
 - Has qualitative output that suits our task 
 - Performs well on average in various benchmarks compared to other possible models
 ___ 
-## The Choice of the Transformer
+
+## Choosing the Transformer
 MonoBert (https://huggingface.co/castorini/monobert-large-msmarco) has the following features:
 - MonoBert adapts Bert for relevance classification 
     - Bert is a pre-trained natural language processing model using a transformer architecture.
@@ -39,17 +43,36 @@ MonoBert (https://huggingface.co/castorini/monobert-large-msmarco) has the follo
 - Easy to use 
 - Performs very well on our validation data
 ___
-## The Choice of the Data Set
-We needed a dataset that had the following properties:
-- Collection of general widely comprehensive knowledge
-- some text we can use as querry to find 
 
-Therfore we chose the Wikipedia summary dataset (https://github.com/tscheepers/Wikipedia-Summary-Dataset) which fullfills this features. Furthermore we use the title as query
+## Choosing the Dataset
+We needed a dataset with the following characteristics:
+- A collection of general, broad knowledge so that we could test the general performance of gpt4all-falcon.
+- Has queries or some text that we could use as queries
+- Not too large, as we have very limited resources
+
+A suitable dataset is the Wikipedia summary dataset (https://github.com/tscheepers/Wikipedia-Summary-Dataset). This contains many summaries of Wikipedia pages that are short in length and therefore do not require too many resources. It contains general, broad knowledge. It also has an extra column that contains the titles that we can use as queries.
+
+This dataset still contains too many rows for our capabilities, so we created a subset of it by using only documents that contain the word 'sport' in them. So we basically have a subset with a sports theme.
 ___
 ## Validation of BM25 and MonoBert
-### The Choice of the Validation Data Set
+It is important to validate the implementations of BM25 and monoBert that we use without gpt4all-falcon, so that we can exclude these two as interfering factors in our test. If BM25 and monoBert perform well in the validation, the results are only influenced by the performance of gpt4all-falcon. With this validation we can draw some conclusions about the performance of gpt4all-falcon.
+
+### Choice of validation dataset
+The dataset we use must have the following characteristics:
+- Similar content to the dataset we use for testing
+- Ground truths such as query relevancies (qrels)
+- Cannot be too large because of limited resources
+
+The dataset we have chosen that fulfills these criteria is WikIR1k (https://ir-datasets.com/wikir.html). This dataset contains Wikipedia articles with different purpose knowledge, which is identical to the dataset we use for testing. This dataset also contains queries and the corresponding qrels
+
+Note that this set cannot be used to generate the LLM answers, as the queries given are only excerpts from the documents themselves and not topics that an LLM can give answer to.
+
 ### Generation of the Subset
-### Outcomes
+The set is too large for our resources, so we took a subset of it. The creation of the subset is worth mentioning. We took all documents containing the word sport. We then added the corresponding queries that we found through qrels to the subset of queries. Then we took all the documents that were a ground truth of the queries in the queries subset and added them to the documents' subset. This ensures that it is possible for BM25 and monoBert to get a perfect match, but we do not falsify the outcome.
+
+### Outcome
+TODO
+___
 ## Findings
 To evaluate the relevance of LLM-generated content in information retrieval we choose 3 different approaches:
 
@@ -82,6 +105,8 @@ Trying random queries however reveals a similar, but not so obvious result.
 These last two plots show the distribution of the 2 types of documents across the top answers to our queries. Evaluating these graphs we conclude the LLM generates mostly correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
 
 ## Future Improvements
-choose another data set for better results
-- query to short and to little semantic
-- do little documents in data set 
+Although our results are significant, there are a few things that could be improved:
+- Select a different dataset for testing. MonoBert ranks the documents according to the semantics of the queries. The results of the findings could probably be more specific if the queries were semantically more meaningful/detailed.
+- Get more resources to:
+    - use larger datasets to exclude outliers
+    - test the model not only on sports documents but also on general knowledge.
