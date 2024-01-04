@@ -74,47 +74,47 @@ The set is too large for our resources, so we took a subset of it. The creation 
 TODO
 ___
 ## Findings
-To evaluate the relevance of LLM-generated content in information retrieval we choose 3 different approaches:
+To evaluate the relevance of LLM-generated content in information retrieval, we chose 3 different approaches:
 
-1. The relation between the amounts of LLM generated and wiki documents in the top results
-2. The position of the first retrieved LLM and wiki document in the top results
-3. The average position of LMM and wiki documents in the top results
+1. The relationship between the amount of LLM-generated documents and wiki documents in the top results.
+2. The position of the first retrieved LLM document and Wikipedia document in the top results.
+3. The average position of LLM documents and wiki documents in the top results.
 
-All these tests were run twice, once evaluating the first 5 documents retrieved for each of the 100 queries after reranking them using BERT, ignoring if they are deemed relevant enough, and another time by evaluating all the relevant documents retrieved.
+All of these tests were run twice, once by evaluating the first 5 documents retrieved for each of the 100 queries, after being re-ranked using BERT, ignoring whether they were considered relevant enough, and another time by evaluating just relevant documents retrieved.
 
-Please, note that these results were achieved by using a subset of the wikipediaset containing only 1000 sports articles. We used 100 different queries, each retrieving the 10 most relevant documents, on which these results are based. Refer to the section "Further Improvements"  for more details on how to extend/improve these results.
+Note that these results were obtained using a subset of the Wikipedia set containing only 1000 sports articles. We used 100 different queries, each retrieving the 10 most relevant documents, on which these results are based. See the "Further Improvements" section for more details on how these results can be extended/improved.
 
-### 1. The relation between the amounts of LLM generated and wiki documents in the top results
+### 1. The relationship between the amount of LLM-generated documents and wiki documents in the top results
 ![alt text](/plots/relevance_percent_top_x.png)
 ![alt text](/plots/relevance_percent_relevant.png)
 
-These two graph show a percentbased representation of the amount of LLM-generated documents and Wikipedia documents retrived by our IR system.
+These two graphs show a percentage-based representation of the amount of LLM-generated documents and Wikipedia documents retrieved by our IR system.
 
-From these two plots we conclude, tath the LLM-generated documents do indeed hold valuable and correct information as they make up a little less than 50% of all documents.
-Looking closer at plot 2 however, the Wikipedia articles answer the queries a little better in general as they are retrieved a bit more often.
+From these two plots, we can conclude that the LLM-generated documents do indeed contain valuable and correct information, as they make up slightly less than 50% of all documents.
+However, a closer look at plot 2 shows that the Wikipedia articles generally answer the queries a little better, as they are retrieved a bit more often.
 
-### 2. The position of the first retrieved LLM and wiki document in the top results
+### 2. The position of the first retrieved LLM document and Wikipedia document in the top results
 ![alt text](/plots/first_index_top_x.png)
 ![alt text](/plots/first_index_relevant.png)
 
-These two graphs show the position of the first document of one type in the list of retrieved documents. Please not that index 0 denotes, that no document of this type was found within the relevant answers.
+These two graphs show the position of the first document of each type in the list of retrieved documents. Note that a value of zero means that no document of that type was found among the relevant documents.
 
-The thesis of method one is further underlined by looking at these two plots. Here we can see the two best fitting documents for a given query normally alternate between being LLM generated or from Wikipedia.
-The wikipedia document being in the top results is to be expected as the query used is the title of the articles. This further supports our theses, since also the LLM generated document (generated using the same title) shows up here. In order for this to happen, the generated content has to state fatcts about the chosen topic. If the AI  where to produce "random" answers, they would not show up anywhere near the top.
+The thesis of the first metrics is further underlined by looking at these two plots. We can see that the two best matching documents for a given query usually alternate between LLM-generated and Wikipedia.
+The Wikipedia document being in the top results is to be expected, as the queries used are the article titles. This further supports our hypotheses, as the LLM-generated document (generated using the same title) also appears as a top result. In order for this to happen, the generated content must state facts about the chosen topic. If the LLM were to produce "random" answers, they would not appear anywhere near the top.
 
-### 3. The average position of LMM and wiki documents in the top results
+### 3. The average position of LLM documents and wiki documents in the top results
 ![alt text](/plots/avg_position_top_x.png)
 ![alt text](/plots/avg_position_relevant.png)
 
-These two graphs show the average position of the documents separated again by type.
+These two graphs show the average position of the documents, separated by type. When looking at the graph, always consider both types of documents at the same time.
 
-Evaluating these graphs we conclude the LLM generates correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
 We can interpret the content of these graphs as a quality metric.
-Always consider both types of documents at the same time when looking at the graph.
-A smaller value of one set and a larger value of the other set means that the quality of information the set with the smaller value provides is higher.
-Consider having a question and want answered. It is probably more usefull recieving one perfect answer instead of 10 good answers.
-Many scattered ranks will lead to a bad score. So having the best and worst rank will lead to an average score. 
+A lower value for one set and a higher value for the other set means that the quality of information provided by the set with the lower value is higher.
+Consider that you have a question and you want an answer. It is probably more useful to get only one perfect answer than 10 good answers.
+Many scattered ranks will lead to a bad score. So having the best and worst rank will give an average score.
 
+Looking at the values of these graphs, we can conclude that gpt4all-falcon generates good quality data, as the averaged positions of the LLM-generated documents complement the averaged positions of the Wikipedia documents alternately.
+___
 ## Future Improvements
 Although our results are significant, there are a few things that could be improved:
 - Select a different dataset for testing. MonoBert ranks the documents according to the semantics of the queries. The results of the findings could probably be more specific if the queries were semantically more meaningful/detailed.
