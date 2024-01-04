@@ -21,7 +21,7 @@ Overview of the implementation:
 5) Re-rank these documents using a transformer, specifically MonoBert
 6) Sort out documents that have a very low relevance score, they are basically not relevant matches.
 7) Now we get a corresponding mixed ranking of LLM and non-LLM documents, which directly translates to the performance of the LLM compared to human written wikipedia articles. Then we calculate some metrics/statistics about the quantity and rank of LLM documents compared to non-LLM documents.
-__
+___
 ## The Choice of the LLM
 Gpt4all-falcon (https://gpt4all.io/index.html) has the following features
 - Relatively small size at ~4 GB
@@ -54,3 +54,5 @@ ___
 ![Alternativer Text](out_2.png)
 ## Future Improvements
 choose another data set for better results
+- query to short and to little semantic
+- do little documents in data set 
