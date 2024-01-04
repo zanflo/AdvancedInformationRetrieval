@@ -110,6 +110,10 @@ These two graphs show the average position of the documents separated again by t
 
 Evaluating these graphs we conclude the LLM generates correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
 We can interpret the content of these graphs as a quality metric.
+Always consider both types of documents at the same time when looking at the graph.
+A smaller value of one set and a larger value of the other set means that the quality of information the set with the smaller value provides is higher.
+Consider having a question and want answered. It is probably more usefull recieving one perfect answer instead of 10 good answers.
+Many scattered ranks will lead to a bad score. So having the best and worst rank will lead to an average score. 
 
 ## Future Improvements
 Although our results are significant, there are a few things that could be improved:
