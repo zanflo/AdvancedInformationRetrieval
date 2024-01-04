@@ -51,7 +51,36 @@ ___
 ### Generation of the Subset
 ### Outcomes
 ## Findings
-![Alternativer Text](out_2.png)
+To evaluate the relevance of LLM-generated content in information retrieval we choose 3 different approaches:
+
+1. The relation between the amounts of LLM generated and wiki documents in the top results
+2. The position of the first retrieved LLM and wiki document in the top results
+3. The average position of LMM and wiki documents in the top results
+
+All these tests were run twice, once evaluating the first 5 documents retrieved for each of the 100 queries after reranking them using BERT, ignoring if they are deemed relevant enough, and another time by evaluating all the relevant documents retrieved.
+
+Please, note that these results were achieved by using a subset of the wikipediaset containing only 1000 sports articles. We used 100 different queries, each retrieving the 10 most relevant documents, on which these results are based. Refer to the section "Further Improvements"  for more details on how to extend/improve these results.
+
+### 1. The relation between the amounts of LLM generated and wiki documents in the top results
+![alt text](/plots/relevance_percent_top_x.png)
+![alt text](/plots/relevance_percent_relevant.png)
+
+From these two plots we conclude, tath the LLM-generated documents do indeed hold valuable and correct information as they make up a little less than 50% of all documents.
+Looking closer at plot 2 however, the Wikipedia articles answer the queries a little better in general as they are retrieved a bit more often.
+
+### 2. The position of the first retrieved LLM and wiki document in the top results
+![alt text](/plots/first_index_top_x.png)
+![alt text](/plots/first_index_relevant.png)
+
+The thesis of method one is further underlined by looking at these two plots. Here we can see the two best fitting documents for a given query normally alternate between being LLM generated or from Wikipedia. This test is however to be taken with a grain of salt since we use the titles of the documents as queries. Since the LLM answers were generated using the Wikipedia articles it is somewhat expected that these 2 documents form the 2 best matches. 
+Trying random queries however reveals a similar, but not so obvious result.
+
+### 3. The average position of LMM and wiki documents in the top results
+![alt text](/plots/avg_position_top_x.png)
+![alt text](/plots/avg_position_relevant.png)
+
+These last two plots show the distribution of the 2 types of documents across the top answers to our queries. Evaluating these graphs we conclude the LLM generates mostly correct and meaningful data as the top results seem to alternate between both human and AI-generated content.
+
 ## Future Improvements
 choose another data set for better results
 - query to short and to little semantic
