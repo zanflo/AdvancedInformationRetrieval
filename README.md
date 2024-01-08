@@ -71,7 +71,9 @@ Note that this set cannot be used to generate the LLM answers, as the queries gi
 The set is too large for our resources, so we took a subset of it. The creation of the subset is worth mentioning. We took all documents containing the word sport. We then added the corresponding queries that we found through qrels to the subset of queries. Then we took all the documents that were a ground truth of the queries in the queries subset and added them to the documents' subset. This ensures that it is possible for BM25 and monoBert to get a perfect match, but we do not falsify the outcome.
 
 ### Outcome
-TODO
+BM25 had an F1@k score of 0.824 and an nDCG@k score of 0.9816.
+BM25 + MonoBert (whole pipleine) had an F1@k score of 0.824 and and nDCG@k score of 0.9886
+This shows that our pipeline is able to retrieve the right documents for a given query and ranks them correctly. The increase of the nDCG@k score of the whole pipeline compared to the BM25 score, shows that the reranking of MonoBert also has a positive impact.
 ___
 ## Findings
 To evaluate the relevance of LLM-generated content in information retrieval, we chose 3 different approaches:
